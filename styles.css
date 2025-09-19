@@ -1,0 +1,225 @@
+/* styles.css
+   Part 1: pure CSS transitions and keyframe animations
+   Part 3: classes that JS will toggle to start/stop animations
+*/
+
+/* Basic layout and reset */
+* { box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+  background: linear-gradient(180deg,#f7fbff,#e9f0ff);
+  color: #0b2545;
+  line-height: 1.3;
+  padding: 28px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+header h1 { margin: 0 0 6px; font-size: 22px; }
+.subtitle { margin: 0 0 18px; color: #375a8a; }
+
+/* panels */
+.card-panel {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 18px rgba(11,37,69,0.06);
+}
+
+/* layout helpers */
+.row, .example-row { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.examples { display: flex; gap: 12px; align-items: center; }
+
+/* ---------- Part 1: CSS only effects ---------- */
+
+/* fancy button with smooth transition on transform and shadow */
+.fancy-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(90deg,#4f8af0,#7bdcff);
+  color: white;
+  box-shadow: 0 8px 18px rgba(79,138,240,0.25);
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+.fancy-btn:hover, .fancy-btn:focus {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 18px 30px rgba(79,138,240,0.3);
+  filter: brightness(1.03);
+}
+
+/* floating box using keyframes - time based trigger */
+.floating-box {
+  width: 96px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#ffd1a8,#ffb38a);
+  font-weight: 700;
+  color: #4b2a0b;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+.floating {
+  animation: float 3.6s ease-in-out infinite;
+}
+
+/* pulse box that scales gently */
+.pulse-box {
+  width: 96px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#bde7ff,#6fbfff);
+  font-weight: 700;
+  color: #04283a;
+  box-shadow: 0 6px 12px rgba(15,64,102,0.12);
+}
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 6px 12px rgba(15,64,102,0.12); }
+  60% { transform: scale(1.06); box-shadow: 0 18px 28px rgba(15,64,102,0.09); }
+  100% { transform: scale(1); box-shadow: 0 6px 12px rgba(15,64,102,0.12); }
+}
+.pulse-box {
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+/* fade in card that runs once on load */
+.fade-card {
+  width: 160px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#e8ffe6,#c7ffd6);
+  color: #064012;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-card {
+  transform: translateY(8px);
+  animation: fadeIn 900ms cubic-bezier(.2,.9,.28,1) 250ms forwards;
+}
+
+/* ---------- Part 3: elements JS will toggle ---------- */
+
+/* box animated by JS by toggling class .anim-pop */
+.anim-box {
+  width: 160px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#fff7b2,#ffd76a);
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 8px 18px rgba(171,115,11,0.12);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+@keyframes pop {
+  0% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.12) rotate(-2deg); }
+  60% { transform: scale(.97) rotate(1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.anim-pop {
+  animation: pop 600ms cubic-bezier(.2,.9,.28,1) both;
+}
+
+/* flip card structure */
+.card {
+  width: 140px;
+  height: 88px;
+  perspective: 900px;
+}
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 650ms cubic-bezier(.2,.75,.28,1);
+  border-radius: 10px;
+}
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.card-front { background: linear-gradient(180deg,#d6f5ff,#bfefff); color:#033d55; }
+.card-back {
+  background: linear-gradient(180deg,#ffdce6,#ffb7d2);
+  color: #3d1133;
+  transform: rotateY(180deg);
+}
+/* JS will toggle class 'flipped' on .card to flip */
+.card.flipped .card-inner { transform: rotateY(180deg); }
+
+/* spinner (hidden by default, JS toggles 'spinning') */
+.spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 5px solid rgba(0,0,0,0.06);
+  border-top-color: rgba(7,82,160,0.9);
+  margin: 8px 0;
+  opacity: 0.25;
+  transition: opacity 220ms ease;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinning {
+  animation: spin 900ms linear infinite;
+  opacity: 1;
+}
+
+/* modal sliding and fading */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.modal .modal-content {
+  width: min(560px, 90%);
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  transform: translateY(-16px);
+  box-shadow: 0 14px 36px rgba(7,30,80,0.12);
+  transition: transform 360ms cubic-bezier(.2,.9,.28,1);
+}
+/* show modal */
+.modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal.open .modal-content {
+  transform: translateY(0);
+}
+
+/* small utilities */
+button { cursor: pointer; }
+.output { margin-top: 8px; color: #234a6a; font-weight: 600; }
+
+/* responsive tweaks */
+@media (max-width:720px) {
+  .row, .example-row { flex-direction: column; align-items: flex-start; }
+}

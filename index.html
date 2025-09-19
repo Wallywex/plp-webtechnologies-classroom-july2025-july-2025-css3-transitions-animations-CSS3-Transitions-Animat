@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CSS + JS Animation Playground</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Bringing Pages to Life with CSS & JavaScript</h1>
+      <p class="subtitle">Part 1: pure CSS | Part 2: JS functions | Part 3: JS triggers CSS</p>
+    </header>
+
+    <!-- Part 1: Pure CSS only -->
+    <section id="part1" class="card-panel">
+      <h2>Part 1 - CSS transitions and keyframe animations (CSS only)</h2>
+
+      <div class="row">
+        <button class="fancy-btn">Hover me</button>
+
+        <div class="examples">
+          <div class="floating-box floating">floating</div>
+          <div class="pulse-box">pulse</div>
+          <div class="fade-card">I fade in on load</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 2: JS functions (scope, params, returns) -->
+    <section id="part2" class="card-panel">
+      <h2>Part 2 — JavaScript functions, scope, parameters and return values</h2>
+
+      <div class="example-row">
+        <div class="calc">
+          <h3>Simple add function</h3>
+          <input id="num1" type="number" value="4" />
+          <input id="num2" type="number" value="5" />
+          <button id="addBtn">Add numbers</button>
+          <div id="sumResult" class="output">sum result will appear here</div>
+        </div>
+
+        <div class="scope-demo">
+          <h3>Scope demo</h3>
+          <button id="incLocal">increment local</button>
+          <button id="incGlobal">increment global</button>
+          <div id="localOut" class="output">local call result</div>
+          <div id="globalOut" class="output">global value</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 3: Combining CSS animations with JS -->
+    <section id="part3" class="card-panel">
+      <h2>Part 3 — Trigger CSS animations from JavaScript</h2>
+
+      <div class="example-row">
+        <div class="control">
+          <h3>Animate a box</h3>
+          <div class="anim-box" id="animBox">click animate</div>
+          <button id="animateBoxBtn">Animate box (JS adds class)</button>
+        </div>
+
+        <div class="control">
+          <h3>Flip card</h3>
+          <div class="card" id="flipCard" tabindex="0" role="button" aria-pressed="false">
+            <div class="card-inner">
+              <div class="card-face card-front">front</div>
+              <div class="card-face card-back">back</div>
+            </div>
+          </div>
+          <button id="flipBtn">Flip card</button>
+        </div>
+
+        <div class="control">
+          <h3>Spinner start / stop</h3>
+          <div id="spinner" class="spinner" aria-hidden="true"></div>
+          <div class="spin-buttons">
+            <button id="startSpin">Start spinner</button>
+            <button id="stopSpin">Stop spinner</button>
+          </div>
+        </div>
+
+        <div class="control">
+          <h3>Modal slide in</h3>
+          <button id="openModalBtn">Open modal</button>
+          <div id="demoModal" class="modal" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+              <button id="closeModalBtn" class="close-modal">close</button>
+              <h4>Modal title</h4>
+              <p>Modal body that slides in and fades out when closed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Olawoyin Olawale &copy; 2025.</p>
+    </footer>
+  </div>
+
+  <script src="scriptt.js"></script>
+</body>
+</html>
